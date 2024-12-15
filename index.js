@@ -37,6 +37,18 @@ app.get("/api/persons", (request, response) => {
   response.json(persons);
 });
 
+// Yhden henkilön tiedot
+app.get("/api/persons/:id", (request, response) => {
+  const id = request.params.id;
+  const person = persons.find((person) => person.id === id);
+
+  if (person) {
+    response.json(person);
+  } else {
+    response.status(404).json({ error: "Person not found" });
+  }
+});
+
 // Info
 app.get("/info", (request, response) => {
   const numberOfPersons = persons.length;
