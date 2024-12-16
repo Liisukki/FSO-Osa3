@@ -1,12 +1,13 @@
-const express = require("express");
-const morgan = require("morgan");
+const express = require("express")
+const morgan = require("morgan")
+const cors = require("cors")
 
-const app = express();
+const app = express()
 
 // Käytä Morgania tiny-muodossa
-app.use(morgan("tiny"));
-
-app.use(express.json());
+app.use(morgan("tiny"))
+app.use(cors())
+app.use(express.json())
 
 let persons = [
   { name: "Arto Hellas", number: "040-123456", id: 1 },
@@ -82,7 +83,7 @@ app.get("/info", (request, response) => {
   response.send(info);
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
